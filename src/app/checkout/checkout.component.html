@@ -1,0 +1,119 @@
+<div class="container">
+    <h2 class="mb-4">Finalizar Compra</h2>
+    
+    @if (cartItems.length > 0) {
+      <div class="row">
+        <div class="col-md-8">
+          <div class="card mb-4">
+            <div class="card-header">
+              <h5 class="mb-0">Información de Contacto</h5>
+            </div>
+            <div class="card-body">
+              <form #checkoutForm="ngForm" (ngSubmit)="onSubmit(checkoutForm)">
+                <div class="mb-3">
+                  <label for="customerName" class="form-label">Nombre Completo</label>
+                  <input 
+                    type="text" 
+                    class="form-control" 
+                    id="customerName" 
+                    name="customerName"
+                    [(ngModel)]="customerDetails.customerName"
+                    required
+                    #nameInput="ngModel">
+                  @if (nameInput.invalid && (nameInput.dirty || nameInput.touched)) {
+                    <div class="text-danger">El nombre es requerido</div>
+                  }
+                </div>
+                
+                <div class="mb-3">
+                  <label for="email" class="form-label">Correo Electrónico</label>
+                  <input 
+                    type="email" 
+                    class="form-control" 
+                    id="email" 
+                    name="email"
+                    [(ngModel)]="customerDetails.email"
+                    required
+                    email
+                    #emailInput="ngModel">
+                  @if (emailInput.invalid && (emailInput.dirty || emailInput.touched)) {
+                    <div class="text-danger">
+                      Ingrese un correo electrónico válido
+                    </div>
+                  }
+                </div>
+                
+                <div class="mb-3">
+                  <label for="phone" class="form-label">Teléfono</label>
+                  <input 
+                    type="tel" 
+                    class="form-control" 
+                    id="phone" 
+                    name="phone"
+                    [(ngModel)]="customerDetails.phone"
+                    required
+                    #phoneInput="ngModel">
+                  @if (phoneInput.invalid && (phoneInput.dirty || phoneInput.touched)) {
+                    <div class="text-danger">El teléfono es requerido</div>
+                  }
+                </div>
+                
+                <div class="mb-3">
+                  <label for="address" class="form-label">Dirección de Envío</label>
+                  <textarea 
+                    class="form-control" 
+                    id="address" 
+                    name="address"
+                    rows="3"
+                    [(ngModel)]="customerDetails.address"
+                    required
+                    #addressInput="ngModel"></textarea>
+                  @if (addressInput.invalid && (addressInput.dirty || addressInput.touched)) {
+                    <div class="text-danger">La dirección es requerida</div>
+                  }
+                </div>
+                
+                <div class="d-flex justify-content-between mt-4">
+                  <a class="btn btn-outline-secondary" routerLink="/carrito">
+                    Volver al Carrito
+                  </a>
+                  <button 
+                    type="submit" 
+                    class="btn btn-primary"
+                    [disabled]="checkoutForm.invalid">
+                    Confirmar Pedido
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">Resumen del Pedido</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                @for (item of cartItems; track item.product.id) {
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    {{ item.product.name }} (x{{ item.quantity }})
+                    <span>${{ (item.product.price * item.quantity).toFixed(2) }}</span>
+                  </li>
+                }
+              </ul>
+              <div class="d-flex justify-content-between mt-3 fw-bold">
+                <span>Total:</span>
+                <span>${{ total.toFixed(2) }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    } @else {
+      <div class="alert alert-warning">
+        No hay productos en el carrito. <a routerLink="/productos">¡Continúa comprando!</a>
+      </div>
+    }
+  </div>

@@ -1,1 +1,77 @@
-/* You can add global styles to this file, and also import other style files */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f9fa;
+  }
+  
+  /* Para componentes con scroll */
+  .scrollable {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+  
+  /* Animaciones para hover en cards de productos */
+  .card {
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Colores de marca personalizados */
+  :root {
+    --bs-primary: #0057b8; /* Azul más oscuro para béisbol */
+    --bs-primary-rgb: 0, 87, 184;
+    --bs-secondary: #d9230f; /* Rojo para detalles */
+    --bs-secondary-rgb: 217, 35, 15;
+  }
+  
+  /* Ajustes responsivos */
+  @media (max-width: 768px) {
+    .container {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+  
+  /* Estilos para botones */
+  .btn-primary {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+  }
+  
+  .btn-primary:hover {
+    background-color: #004494;
+    border-color: #004494;
+  }
+  
+  .btn-outline-primary {
+    color: var(--bs-primary);
+    border-color: var(--bs-primary);
+  }
+  
+  .btn-outline-primary:hover {
+    background-color: var(--bs-primary);
+    color: white;
+  }
+  
+  /* Footer siempre al fondo */
+  app-root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  main {
+    flex: 1;
+  }
+  
+  /* Estilos para imágenes */
+  .product-img {
+    object-fit: cover;
+    height: 200px;
+  }

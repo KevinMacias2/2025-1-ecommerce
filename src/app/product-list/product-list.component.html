@@ -1,0 +1,17 @@
+<div class="container">
+    <h2 class="mb-4">Dulces</h2>
+    <div class="row g-4">
+      @for (product of products; track product.id) {
+        <div class="col-12 col-md-6 col-lg-4">
+          <app-product-card 
+            [product]="product" 
+            (add)="addToCart($event)">
+          </app-product-card>
+        </div>
+      } @empty {
+        <div class="col">
+          <div class="alert alert-info">No hay productos disponibles.</div>
+        </div>
+      }
+    </div>
+  </div>
